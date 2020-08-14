@@ -1,0 +1,19 @@
+import { type } from "jquery";
+
+export interface Point {
+  readonly x: number
+  readonly y: number
+}
+
+export interface IViewer {
+  show: () => void;
+  remove: () => void
+}
+
+export type Shape = Point[]
+
+export enum Direction {
+  Left,
+  Right,
+  Down,
+}
