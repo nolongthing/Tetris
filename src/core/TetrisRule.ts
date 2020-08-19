@@ -3,8 +3,6 @@ import { BoardSize } from "./GameConfig";
 import { SquareGroup } from "./SquareGroup";
 
 export class TetrisRule {
-
-  private static _isCanMove = true;
   /**
    * 根据方块形状确认是否可移动到目标坐标点
    */
@@ -43,10 +41,8 @@ export class TetrisRule {
     }
     if (this.canMove(sqg.shape, nextPoint)) {
       sqg.centerPoint = nextPoint;
-      this._isCanMove = true;
       return true
     };
-    this._isCanMove = false;
     return false
   }
 
@@ -63,13 +59,8 @@ export class TetrisRule {
    * 方块变换形态
    */
   static changeShape(sqg: SquareGroup) {
-    if (this._isCanMove) {
-      sqg.shape = sqg.shape.map(i => {
-        return {
-          x: -i.y,
-          y: i.x
-        }
-      })
+    if (this.canMove(sqg.getCenterPointBeforeRotate(), sqg.centerPoint)) {
+      sqg.rotate();
     }
   }
 }

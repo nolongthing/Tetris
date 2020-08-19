@@ -1,4 +1,3 @@
-import { type } from "jquery";
 
 export interface Point {
   readonly x: number
@@ -16,4 +15,11 @@ export enum Direction {
   Left,
   Right,
   Down,
+}
+
+export enum GameStatus{
+  Start,
+  Playing,
+  Pause,
+  End
 }

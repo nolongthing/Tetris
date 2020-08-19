@@ -5,6 +5,8 @@ import $ from 'jquery';
 import { createTetriShape } from './core/Tetris';
 import { TetrisRule } from './core/TetrisRule';
 import { Direction } from './core/types';
+import { Game } from './core/Game';
+import { GamePageViewer } from './core/viewer/GamePageViewer';
 
 
 // const square = new Square();
@@ -21,19 +23,33 @@ import { Direction } from './core/types';
 // })
 // const sqg = new SquareGroup([{ x: -1, y: 0 }, { x: 0, y: -1 }, { x: 0, y: 0 }, { x: 0, y: 1 }], { x: 6, y: 0 }, '#f40');
 
-const sqg = createTetriShape();
-$('#down').on('click', () => {
-  TetrisRule.move(sqg, Direction.Down);
-});
-$('#left').on('click', () => {
-  TetrisRule.move(sqg, Direction.Left);
-});
-$('#right').on('click', () => {
-  TetrisRule.move(sqg, Direction.Right);
-});
+// let sqg = createTetriShape({x:1,y:2});
+// $('#down').on('click', () => {
+//   TetrisRule.move(sqg, Direction.Down);
+// });
+// $('#left').on('click', () => {
+//   TetrisRule.move(sqg, Direction.Left);
+// });
+// $('#right').on('click', () => {
+//   TetrisRule.move(sqg, Direction.Right);
+// });
+
+
+
+const game = new Game(new GamePageViewer());
+
+game.initGame();
+
+$('#pause').on('click',()=>{
+  game.pause();
+})
+
+$('#start').on('click',()=>{
+  game.start();
+})
 
 window.addEventListener('keydown', (e) => {
   if (e.keyCode === 38) {
-    TetrisRule.changeShape(sqg);
+    game.changeShape();
   }
-})
+});

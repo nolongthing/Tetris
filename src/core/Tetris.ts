@@ -1,48 +1,97 @@
-import { Shape } from "./types";
+import { Shape, Point } from "./types";
 import { createRandom } from "./Utils";
 import { SquareGroup } from "./SquareGroup";
 
-abstract class PShape {
-  protected deformTime: number = 0;
-  protected abstract _initShape: Shape
-  abstract deform(): void
+class TShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: -1 }],
+      centerPoint,
+      color
+    )
+  }
+
 }
 
-// class TShape extends PShape {
-//   protected _initShape: Shape;
-//   deform(): void {
-//     this._initShape = this._initShape.map(item => {
-//       return {
-//         x: item.y,
-//         y: item.x
-//       }
-//     })
-//   }
-//   constructor() {
-//     super();
-//     this._initShape = [{ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: -1 }]
-//   }
+class LShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: -2, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 0 }, { x: 0, y: -1 }],
+      centerPoint,
+      color
+    )
+  }
 
-//   get initShape() {
-//     return this._initShape;
-//   }
-// }
+}
 
-const TShape: Shape = [{ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: -1 }];
+class LMirrorShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: 2, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 0 }, { x: 0, y: -1 }],
+      centerPoint,
+      color
+    )
+  }
 
-const LShape: Shape = [{ x: -2, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 0 }, { x: 0, y: -1 }];
+}
 
-const LMirrorShape: Shape = [{ x: 2, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 0 }, { x: 0, y: -1 }];
+class SShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 1 }],
+      centerPoint,
+      color
+    )
+  }
 
-const SShape: Shape = [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 1 }];
+  rotate() {
+    super.rotate();
+    this.isClock = !this.isClock;
+  }
 
-const SMirrorShape: Shape = [{ x: 0, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }];
+}
 
-const SquareShape: Shape = [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }];
+class SMirrorShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: 0, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }],
+      centerPoint,
+      color
+    )
+  }
+  rotate() {
+    super.rotate();
+    this.isClock = !this.isClock;
+  }
+}
 
-const LineShape: Shape = [{ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }];
+class SquareShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }],
+      centerPoint,
+      color
+    )
+  }
+  rotate() {
 
-const UShape: Shape = [{ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: -1, y: -1 }, { x: 1, y: -1 }];
+  }
+}
+
+class LineShape extends SquareGroup {
+  constructor(centerPoint: Point, color: string) {
+    super(
+      [{ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }],
+      centerPoint,
+      color
+    )
+  }
+  rotate() {
+    super.rotate();
+    this.isClock = !this.isClock;
+  }
+
+}
 
 export const shapes = [
   TShape,
@@ -51,8 +100,7 @@ export const shapes = [
   SShape,
   SMirrorShape,
   SquareShape,
-  LineShape,
-  UShape
+  LineShape
 ];
 
 export const colors = [
@@ -66,9 +114,9 @@ export const colors = [
  * 随机产生一个俄罗斯方块组合
  * @returns {SquareGroup} 方块组合的实例
  */
-export function createTetriShape() {
+export function createTetriShape(centerPoint:Point): SquareGroup {
   const shapeI = createRandom(0, shapes.length);
   const colorI = createRandom(0, colors.length);
-  const sqg = new SquareGroup(shapes[shapeI], { x: 6, y: 2 }, colors[colorI]);
+  const sqg = new shapes[shapeI](centerPoint, colors[colorI]);
   return sqg;
 }

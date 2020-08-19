@@ -1,7 +1,5 @@
 import { Square } from "./Square";
-import $ from 'jquery';
 import { Shape, Point } from "./types";
-import { SquarePageViewer } from "./viewer/SquarePageViewer";
 
 export class SquareGroup {
   private _squares: readonly Square[];
@@ -16,10 +14,14 @@ export class SquareGroup {
         x: this._centerPoint.x + item.x,
         y: this._centerPoint.y + item.y
       }, this.color);
-      square.viewer = new SquarePageViewer(square, $('#root'));
+      // square.viewer = new SquarePageViewer(square, $('#root'));
       tempArr.push(square);
     })
     this._squares = tempArr;
+  }
+
+  get squares() {
+    return this._squares;
   }
 
   get shape() {
@@ -49,5 +51,24 @@ export class SquareGroup {
     })
   }
 
+  protected isClock = true;
+  /**
+   * 返回旋转后的坐标数组
+   */
+  getCenterPointBeforeRotate(): Shape {
+    return this._shape.map(item => {
+      return {
+        x: this.isClock ? -item.y : item.y,
+        y: this.isClock ? item.x : -item.x
+      }
+    })
+  }
+  /**
+   * 旋转
+   */
+  rotate() {
+    const tempShape = this.getCenterPointBeforeRotate();
+    this.shape = tempShape;
+  }
 
 }
