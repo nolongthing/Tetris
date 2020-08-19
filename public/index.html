@@ -6,42 +6,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
     #container {
-      height: 600px;
-      width: 540px;
+      height: 100%;
+      width: 100%;
       margin: 0 auto;
       overflow: hidden;
       display: flex;
+      justify-content: center;
     }
-    #root{
-      height: 600px;
-      width: 390px;
+
+    #root {
       background-color: #333;
       position: relative;
     }
-    #panel{
+
+    #panel {
       position: relative;
-      width: 150px;
-      height: 300px;
       border: 1px solid #f40;
     }
-    #controller {
-      text-align: center;
+
+    #notice {
+      position: absolute;
+      bottom: 0;
+    }
+    #gameStatus{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      color: aliceblue;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
 
 <body>
   <div id="container">
-    <div id="root"></div>
-    <div id="panel"></div>
-  </div>
-  <div id="controller">
-    <button id="down">下落</button>
-    <button id="left">左移</button>
-    <button id="right">右移</button>
-    <button id="pause">暂停</button>
-    <button id="start">开始</button>
+    <div id="root">
+      <div id="gameStatus"></div>
+    </div>
+    <div id="panel">
+      <p id="notice">
+        键盘控制游戏：<br>
+        ↑ ：旋转方块 <br>
+        ↓ ：快速下落<br>
+        ← ：向左移动<br>
+        → ：向右移动<br>
+        空格 ：暂停/开始<br>
+        (首次进入，按空格开始)
+      </p>
+    </div>
   </div>
 </body>
 

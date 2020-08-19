@@ -1,3 +1,4 @@
+import { Square } from "./Square"
 
 export interface Point {
   readonly x: number
@@ -10,6 +11,8 @@ export interface IViewer {
 }
 
 export type Shape = Point[]
+
+export type Blocks = Square[]
 
 export enum Direction {
   Left,

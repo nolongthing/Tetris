@@ -1,5 +1,5 @@
 import { Square } from "./Square";
-import { Shape, Point } from "./types";
+import { Shape, Point, Blocks } from "./types";
 
 export class SquareGroup {
   private _squares: readonly Square[];
@@ -8,7 +8,7 @@ export class SquareGroup {
     private _centerPoint: Point,
     private color: string
   ) {
-    const tempArr: Square[] = [];
+    const tempArr: Blocks = [];
     this._shape.forEach(item => {
       const square = new Square({
         x: this._centerPoint.x + item.x,
