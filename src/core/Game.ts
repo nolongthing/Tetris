@@ -118,6 +118,7 @@ export class Game {
         this._gameStatus = GameStatus.End;
         clearInterval(this._timer);
         this._timer = undefined;
+        this._viewer.setStatusShow('游戏结束，按空格键开始新的游戏', 'flex');
         return true;
       }
     }

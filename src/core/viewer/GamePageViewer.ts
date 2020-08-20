@@ -27,8 +27,8 @@ export class GamePageViewer {
       height: BoardSize.height * height
     })
 
-    if(game.gameStatus === GameStatus.Start){
-      this._statusContent.html('按空格以开始游戏')
+    if (game.gameStatus === GameStatus.Start) {
+      this.setStatusShow('按空格以开始游戏', 'flex');
     }
 
     //添加键盘点击事件
@@ -47,16 +47,30 @@ export class GamePageViewer {
       }
       if (e.keyCode === 32) {
         if (game.gameStatus === GameStatus.Pause) {
+          this.setStatusShow()
           game.start()
         } else if (game.gameStatus === GameStatus.Playing) {
+          this.setStatusShow('暂停', 'flex')
           game.pause()
         } else if (game.gameStatus === GameStatus.End || game.gameStatus === GameStatus.Start) {
-          this._statusContent.css({
-            display:'none'
-          })
+          this.setStatusShow()
           game.initGame();
         }
       }
+    })
+  }
+
+  /**
+   * 设置悬浮层的显示相关
+   * @param text 需要显示的内容
+   * @param {string} display  "none"|"flex" 默认为none
+   */
+  setStatusShow(text?: string, display: "none" | "flex" = 'none') {
+    if (text) {
+      this._statusContent.html(text);
+    }
+    this._statusContent.css({
+      display
     })
   }
 
