@@ -1,70 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    #container {
-      height: 100%;
-      width: 100%;
-      margin: 0 auto;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-    }
-
-    #root {
-      background-color: #333;
-      position: relative;
-    }
-
-    #panel {
-      position: relative;
-      border: 1px solid #f40;
-    }
-
-    #notice {
-      position: absolute;
-      bottom: 0;
-    }
-    #gameStatus{
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      color: aliceblue;
-      background-color: rgba(255, 255, 255, 0.3);
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
-  </style>
+  <title>象棋</title>
 </head>
-
 <body>
-  <div id="container">
-    <div id="root">
-      <div id="gameStatus"></div>
-    </div>
-    <div id="panel">
-      <p id="notice">
-        键盘控制游戏：<br>
-        ↑ ：旋转方块 <br>
-        ↓ ：快速下落<br>
-        ← ：向左移动<br>
-        → ：向右移动<br>
-        空格 ：暂停/开始<br>
-        (首次进入，按空格开始)
-      </p>
-    </div>
-  </div>
+  
 </body>
-
 </html>
