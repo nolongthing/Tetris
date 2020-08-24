@@ -6,12 +6,13 @@ export class Car extends Piece {
   protected _name: PieceName = PieceName.Car;
   constructor(
     protected _camp: PieceCamp,
-    protected _point: IPoint,
+    protected _point: IPoint = { x: 0, y: 0 },
     protected _viewer: PiecePageViewer,
   ) {
     super();
+    this._viewer.show(this);
   }
 
- 
+
 
 }
