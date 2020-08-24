@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "isolatedModules": true,
+    "baseUrl": "./src/"
   },
   "include": ["./src"],
 }
