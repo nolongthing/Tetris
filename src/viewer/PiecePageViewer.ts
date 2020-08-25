@@ -16,7 +16,7 @@ export class PiecePageViewer implements IPiecePageViewer {
   show(piece: Piece) {
     const { x, y } = piece.point;
     if (!this._pieceBox) {
-      this._pieceBox = $(`<img src="./src/img/${piece.camp}_${piece.name}.png">`)
+      this._pieceBox = $(`<img class='piece' src="./src/img/${piece.camp}_${piece.name}.png">`).appendTo(gameBox)
     }
     this._pieceBox.css({
       position: 'absolute',
@@ -25,7 +25,7 @@ export class PiecePageViewer implements IPiecePageViewer {
       width: 50,
       height: 50,
       backgroundSize: 'contain'
-    }).appendTo(gameBox);
+    });
   }
 
   /**

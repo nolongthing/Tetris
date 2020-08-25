@@ -6,12 +6,12 @@ import $ from 'jquery'
 
 
 console.log('socketDocument')
-const socket = io('http://localhost:3001');
+// const socket = io('http://localhost:3001');
 
-socket.on('connect', () => {
-  console.log('connecting');
-})
+// socket.on('connect', () => {
+//   console.log('connecting');
+// })
 
-$('.gameBox').on('click', (e) => {
-  console.log(e);
-})
+// $('.gameBox').on('click', (e) => {
+//   console.log(e);
+// })
