@@ -21,14 +21,6 @@ export class Car extends Piece {
     }
     return false;
   }
-  /**
-   * 根据传入的坐标移动到目标位置
-   */
-  move(point: IPoint) {
-    if (this.isCanMove(point)) {
-      this.point = point;
-    }
-  }
 
 }
 export class Cannon extends Piece {
@@ -42,6 +34,15 @@ export class Cannon extends Piece {
     this._viewer.show(this);
   }
 
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export class Elephant extends Piece {
@@ -53,6 +54,16 @@ export class Elephant extends Piece {
   ) {
     super();
     this._viewer.show(this);
+  }
+
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
   }
 
 }
@@ -68,6 +79,16 @@ export class General extends Piece {
     this._viewer.show(this);
   }
 
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
+  }
+
 }
 
 export class Horse extends Piece {
@@ -79,6 +100,16 @@ export class Horse extends Piece {
   ) {
     super();
     this._viewer.show(this);
+  }
+
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
   }
 
 }
@@ -94,6 +125,16 @@ export class Pawn extends Piece {
     this._viewer.show(this);
   }
 
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
+  }
+
 }
 
 export class Sergeant extends Piece {
@@ -107,4 +148,25 @@ export class Sergeant extends Piece {
     this._viewer.show(this);
   }
 
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
+  }
+
 }
+
+
+export const PiecesList = [
+  Car,
+  Horse,
+  Elephant,
+  Sergeant,
+  General,
+  Cannon,
+  Pawn
+]

@@ -4,6 +4,7 @@ export interface IPoint {
   readonly x: number
   readonly y: number
   readonly camp?: PieceCamp
+  readonly index?: number
 }
 
 export enum PieceName {

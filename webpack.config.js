@@ -26,6 +26,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".ts", ".js"]
+    extensions: [".ts", ".js"],
+    alias: {
+      'core': __dirname + '/src/core/',
+      'viewer': __dirname + '/src/viewer/'
+    }
   }
 }
