@@ -38,7 +38,7 @@ export abstract class Piece {
    * 棋子根据传入的坐标位置移动
    * @return {boolean} 是否移动成功
    */
-  protected move(): boolean {
-    return true;
-  }
+  // protected move(): boolean {
+  //   return true;
+  // }
 }

@@ -3,6 +3,7 @@ import { Piece } from "./Piece";
 export interface IPoint {
   readonly x: number
   readonly y: number
+  readonly camp?: PieceCamp
 }
 
 export enum PieceName {

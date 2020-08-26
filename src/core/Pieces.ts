@@ -12,6 +12,23 @@ export class Car extends Piece {
     super();
     this._viewer.show(this);
   }
+  /**
+   * 根据传入的坐标点判断是否可移动
+   */
+  isCanMove(point: IPoint): boolean {
+    if (point.x === this.point.x || this.point.y === point.y) {
+      return true;
+    }
+    return false;
+  }
+  /**
+   * 根据传入的坐标移动到目标位置
+   */
+  move(point: IPoint) {
+    if (this.isCanMove(point)) {
+      this.point = point;
+    }
+  }
 
 }
 export class Cannon extends Piece {
