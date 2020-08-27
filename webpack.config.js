@@ -28,8 +28,10 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"],
     alias: {
+      'img': __dirname + '/src/img/',
       'core': __dirname + '/src/core/',
-      'viewer': __dirname + '/src/viewer/'
+      'viewer': __dirname + '/src/viewer/',
+      'apiService': __dirname + '/src/apiService/'
     }
   }
 }

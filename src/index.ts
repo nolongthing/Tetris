@@ -1,9 +1,10 @@
 import { Car, Sergeant, Pawn, Cannon } from './core/Pieces';
 import { PieceCamp } from './core/type';
 import { PiecePageViewer } from './viewer/PiecePageViewer';
-import $ from 'jquery';
+
 import './apiService/service';
 import { Game } from './core/Game';
+import { GamePageViewer } from 'viewer/GamePageViewer';
 
 
 
@@ -25,16 +26,6 @@ import { Game } from './core/Game';
 //   }
 // }, 1000);
 
-// $('.gameBox').on('click', (e) => {
-//   const x = Math.floor(e.offsetX / 50)
-//   const y = Math.floor(e.offsetY / 50)
-//   console.log(x, y);
-//   car.move({ x, y })
-// })
 
-// $('.piece').on('click', (e) => {
-//   e.stopPropagation()
-//   console.log(11);
-// })
 
-new Game();
+new GamePageViewer(new Game());
