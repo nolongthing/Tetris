@@ -44,4 +44,8 @@ export class Game {
   get pointList() {
     return this._pointList;
   }
+
+  set pointList(val) {
+    this._pointList = val;
+  }
 }

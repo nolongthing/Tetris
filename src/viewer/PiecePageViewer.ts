@@ -24,7 +24,8 @@ export class PiecePageViewer implements IPiecePageViewer {
       top: y * height,
       width: 50,
       height: 50,
-      backgroundSize: 'contain'
+      backgroundSize: 'contain',
+      zIndex: 2
     });
   }
 

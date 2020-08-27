@@ -12,14 +12,11 @@ export class PieceRules {
   static isCanMove(piece: Piece, point: IPoint, pointList: IPoint[]): boolean {
     /* 做car的碰撞实验 */
     if (piece.isCanMove(point)) {
-      console.log(point,'当前棋子的坐标',piece);
       const haveImpactPoint = pointList.some(item => (
         (item.x === point.x && ((point.y > item.y && item.y > piece.point.y) || (point.y < item.y && item.y < piece.point.y)))
         ||
         (item.y === point.y && ((point.x > item.x && item.x > piece.point.x) || (point.x < item.x && item.x < piece.point.x)))
       ));
-
-      console.log(haveImpactPoint,'碰撞判断');
 
       if (haveImpactPoint) {
         return false

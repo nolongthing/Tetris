@@ -7,10 +7,14 @@ import { Piece } from 'core/Piece';
 
 export class GamePageViewer {
   private _selectedPoint?: IPoint
+  private _redSelecterMark: JQuery<HTMLElement>
+  private _blackSelecterMark: JQuery<HTMLElement>
   constructor(
     private _game: Game
   ) {
     this.initFun();
+    this._redSelecterMark = $('<img class="rBox" src="./src/img/r_box.png" >').appendTo($('#gameBox')).css({ display: 'none' });
+    this._blackSelecterMark = $('<img class="bBox" src="./src/img/b_box.png" >').appendTo($('#gameBox')).css({ display: 'none' });
   }
 
   private initFun() {
@@ -21,7 +25,6 @@ export class GamePageViewer {
     setTimeout(() => {
       $('.piece').on('click', (e) => {
         e.stopPropagation()
-        // console.log(11);
         this.handlePiece(e);
       })
     }, 0);
@@ -31,13 +34,15 @@ export class GamePageViewer {
    * 点击棋子 完成的操作
    */
   private handlePiece(e: JQuery.ClickEvent) {
-    console.log(e);
+
     const { pieceList, selected, curPlayer, pointList } = this._game;
     const { left, top } = $(e.target).position();
+    console.log(left, top);
     const point: IPoint = {
-      x: Math.floor(left / pieceView.width),
-      y: Math.floor(top / pieceView.height)
+      x: Math.floor((left + 10) / pieceView.width),
+      y: Math.floor((top + 10) / pieceView.height)
     }
+    console.log(point);
     const curPiece = pieceList?.find(item => item.point.x === point.x && item.point.y === point.y);
     if (!curPiece) {
       return console.error('错误：未能从棋盘中找到当前点击的棋子');
@@ -46,7 +51,7 @@ export class GamePageViewer {
     if (!selected) {
       /* 选手是否与点击棋子同阵营 */
       if (curPlayer === curPiece.camp) {
-        console.log('首次选中棋子:', curPiece);
+
         /* 选中 */
         this._game.selected = curPiece;
         this.showMark(curPiece.point);
@@ -67,10 +72,8 @@ export class GamePageViewer {
           this.showMark(curPiece.point);
         } else {
           /* 尝试移动选中棋子，成功就‘吃’ */
-          console.log(1221212);
           this._selectedPoint = selected.point;
           const isMove = PieceRules.move(selected, curPiece.point, pointList);
-          console.log(isMove);
           if (isMove) {
             /* 移除目标位非当前阵营的棋子 */
             this.removePiece(curPiece);
@@ -90,9 +93,31 @@ export class GamePageViewer {
    * 点击棋盘 完成的操作
    */
   private handleBoard(e: JQuery.ClickEvent) {
+    const { selected, pointList, curPlayer } = this._game;
     const x = Math.floor(e.offsetX / pieceView.width)
     const y = Math.floor(e.offsetY / pieceView.height)
     console.log(x, y);
+    /* 当前是否有选中棋子 */
+    if (selected) {
+      const selectedTempPoint = selected.point;
+      const isMove = PieceRules.move(selected, { x, y }, pointList);
+      if (isMove) {
+        /* 移动成功 清空当前选择 更换选手位置 更新坐标列表 */
+        this._game.selected = undefined;
+        this._game.curPlayer = curPlayer === PieceCamp.Red ? PieceCamp.Black : PieceCamp.Red;
+        this._game.pointList = pointList.map(item => {
+          if (item.x === selectedTempPoint.x && item.y === selectedTempPoint.y) {
+            return { x, y, camp: item.camp, index: item.index }
+          } else {
+            return item
+          }
+        })
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
   }
 
   /**
@@ -100,6 +125,15 @@ export class GamePageViewer {
    */
   private showMark(point: IPoint) {
     console.log('显示选中坐标：', point);
+    this._redSelecterMark.css({
+      position: 'absolute',
+      display: 'inline-block',
+      left: point.x * pieceView.width,
+      top: point.y * pieceView.height,
+      backgroupSize: '100% 100%',
+      width: `${pieceView.width}`,
+      height: `${pieceView.height}`
+    })
   }
   /**
    * 取消显示当前棋子的mark标识
