@@ -130,7 +130,7 @@ export class GamePageViewer {
       display: 'inline-block',
       left: point.x * pieceView.width,
       top: point.y * pieceView.height,
-      backgroupSize: '100% 100%',
+      backgroundSize: '100% 100%',
       width: `${pieceView.width}`,
       height: `${pieceView.height}`
     })
