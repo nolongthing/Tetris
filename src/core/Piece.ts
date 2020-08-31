@@ -35,7 +35,7 @@ export abstract class Piece {
     }
   }
 
-  abstract isCanMove(point: IPoint): boolean;
+  abstract isCanMove(piece: Piece, point: IPoint, pointList: IPoint[]): boolean;
   /**
    * 棋子根据传入的坐标位置移动
    * @return {boolean} 是否移动成功
